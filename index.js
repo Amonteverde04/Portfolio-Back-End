@@ -12,7 +12,8 @@ const PORT = process.env.PORT || 3001;
 const URI = process.env.DATABASE_CONNECTION;
 const client = new MongoClient(URI);
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.use(express.static(path.resolve(__dirname, 'public')));
 
 async function run() {
@@ -49,4 +50,3 @@ async function run() {
     }
 }
 run().catch(console.dir);
-
