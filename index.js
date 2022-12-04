@@ -15,11 +15,14 @@ const client = new MongoClient(URI);
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(express.static(path.resolve(__dirname, 'public')));
+app.use(express.json({
+    type: ['application/json', 'text/plain']
+}));
 
 async function run() {
     try {
         console.log("Connected successfully to server...");
-
+        
         app.post("/post-feedback", [
             check('Name').trim().escape().stripLow(),
             check('Email').trim().escape(),
